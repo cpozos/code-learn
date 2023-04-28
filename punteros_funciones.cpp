@@ -52,14 +52,19 @@ int main()
 	myPointerFuncion = &ImprimaMensajeConHola;
 	EjecturaDeFuncion(myPointerFuncion);
 
+	/*****************************************************/
   	// EJEMPLO: PIZZAS
 	// Super especial usando funciones explicitamente
+	/*****************************************************/
 	std::string pizzaEspecial = IniciarPizza();
 	pizzaEspecial = AgregarExtraQueso(pizzaEspecial);
 	pizzaEspecial = AgregarCondimentos(pizzaEspecial);
 	pizzaEspecial = AgregarCondimentosParaMexicana(pizzaEspecial);
 	
+	/*****************************************************/
+  	// EJEMPLO: PIZZAS
 	// Super especial usando un puntero que va siendo modificado con las direcciones de las diferences funciones.
+	/*****************************************************/
 	std::string pizzaPointerEspecial = IniciarPizza();
   
   	// Declaro puntero a una funcion que regresa un string y recibe un string. (Firma de la funcion)
@@ -79,22 +84,39 @@ int main()
 	myPizzaPointer = &AgregarCondimentosParaMexicana;
   	// Ejecuto la funcion a la que esta apuntando el puntero
 	pizzaPointerEspecial = (*myPizzaPointer)(pizzaPointerEspecial);
-
+	
+	/*****************************************************/
 	// EJEMPLO PIZZAS usando arrays
+	/*****************************************************/
 	pizzaPointerEspecial = IniciarPizza();
   
   	// Declaro mi receta: la receta contiene 3 pasos. Receta es un arreglo de 3 punteros a funciones cuya firma es: regresan string y reciben 1 string.
 	const int pasos = 3;
 	std::string (*receta[pasos])(std::string) = 
 	{ 
-		 &AgregarExtraQueso, // Primer puntero en el arreglo apunta a AgregarExtraQueso
-		 &AgregarCondimentos, // Segundo puntero en el arreglo apunta a AgregarCondimentos
-	   &AgregarCondimentosParaMexicana, // Segundo puntero en el arreglo apunta a AgregarCondimentosParaMexicana
+	 	&AgregarExtraQueso, // Primer puntero en el arreglo apunta a AgregarExtraQueso
+	 	&AgregarCondimentos, // Segundo puntero en el arreglo apunta a AgregarCondimentos
+   		&AgregarCondimentosParaMexicana, // Segundo puntero en el arreglo apunta a AgregarCondimentosParaMexicana
 	};
   	// Recorre todos los pasos en la receta
 	for (int i = 0; i < pasos; i++)
 	{
-    	// Ejecuta la funcion a la que apunta el puntero en la posicion i
+    		// Ejecuta la funcion a la que apunta el puntero en la posicion i.
+		// Pasandole como para a pizzaPointerEspecial, y asignando el resultado de nuevo a pizzaPointerEspecial
 		pizzaPointerEspecial = (*receta[i])(pizzaPointerEspecial);
+	}
+	
+	// Receta para Pizza Super Queso
+	std::string pizzaSQ = IniciarPizza();
+	const int pasosSQ = 3;
+	std::string (*recetaSQ[pasosSQ])(std::string) = 
+	{ 
+	 	&AgregarExtraQueso,
+	 	&AgregarCondimentos,
+   		&AgregarExtraQueso,
+	};
+	for (int i = 0; i < pasosSQ; i++)
+	{
+		pizzaSQ = (*recetaSQ[i])(pizzaSQ);
 	}
 }
