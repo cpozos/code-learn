@@ -43,11 +43,14 @@ std::string AgregarExtraQueso(std::string pizza)
 
 int main()
 {
-	// Explicitamente, Aqui conocemos los nombres de las funciones
+	// Explicitamente
+	// Dentro de main(), conocemos los nombres de las funciones
 	ImprimaMensaje("Hola");
 	ImprimaMensajeConHola("saludos");
 
-	// Implicitamente. EjecturaDeFuncion no conoce los nombres, solo sabe que recibirá las direcciones en memoria.
+	// Implicitamente.
+	// EjecturaDeFuncion no conoce los nombres de las funciones, solo sabe que recibirá las direcciones en memoria de funciones con una firma determinada.
+	// La firma en este caso es: no regresa ningun valor y recibe 1 parametro de tipo std::string
 	void (*myPointerFuncion)(std::string);
 	myPointerFuncion = &ImprimaMensajeConHola;
 	EjecturaDeFuncion(myPointerFuncion);
